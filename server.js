@@ -27,6 +27,7 @@ app.get("/", (req, res) => {
 });
 
 require("./app/routes/payoutReport.route")(app);
+require("./app/routes/payinReport.router")(app);
 
 // set port listing for request
 const PORT = process.env.PORT || 3003;

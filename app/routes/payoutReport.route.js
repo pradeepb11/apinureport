@@ -7,5 +7,5 @@ module.exports = app => {
     // Create a new Tutorial
     router.post('/', payoutReport.findByDate);
 
-    app.use('/api/report', router);
+    app.use('/api/payoutreport', router);
 }

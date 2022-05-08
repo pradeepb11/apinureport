@@ -1,4 +1,4 @@
-const payoutReports = require('../models/payoutreport.model');
+const payinReports = require('../models/payinreport.model');
 const timestamp = require('time-stamp');
 //// Retrieve all Tutorials from the database (with condition).
 
@@ -19,7 +19,7 @@ exports.findByDate = (req, res, next) => {
    
     console.log(starttimestamp, endtimestamp);
    
-    payoutReports.getTrastion({starttimestamp,endtimestamp},(err, data)=>{
+    payinReports.getTrastion({starttimestamp,endtimestamp},(err, data)=>{
         if (err)
         res.status(500).send({
           message:
