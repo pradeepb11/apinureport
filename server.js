@@ -1,6 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const https = require('https');
+const fs = require('fs');
 
 const app = express();
 
@@ -20,6 +22,17 @@ app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Headers", "Content-Type");
     next();
 })
+
+
+// https.createServer(
+//     // Provide the private and public key to the server by reading each
+//     // file's content with the readFileSync() method.
+//     {
+//         key: fs.readFileSync("key.pem"),
+//         cert: fs.readFileSync("cert.pem"),
+//     },
+//     app
+// )
 
 // simple route
 app.get("/", (req, res) => {
