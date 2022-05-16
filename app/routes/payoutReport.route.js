@@ -13,5 +13,8 @@ module.exports = app => {
     // get pauyout failure
     router.get('/failure', payoutReport.retrivetodaydataFailurePayout);
 
+    // fetch data payout monthwise
+    router.get('/payoutmonthReport', payoutReport.getThismonthPayoutamt);
+
     app.use('/api/payoutreport', router);
 }

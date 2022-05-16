@@ -85,3 +85,31 @@ exports.retrivetodaydataFailurePayin = async(req, res, next) => {
   })
 
 }
+
+
+exports.getThismonthPayinamt = async (req, res, next) =>{
+    const startOfMonth = moment().startOf('month').format('YYYY-MM-DD HH:mm:ss');
+    const endOfMonth   = moment().endOf('month').format('YYYY-MM-DD HH:mm:ss');
+
+    console.log(startOfMonth, endOfMonth)
+
+    // let starttimestamp = Math.floor(startOfMonth /1000);
+    // let endtimestamp = Math.floor(endOfMonth/1000);
+    let starttimestamp = moment(startOfMonth).format("X");
+    let endtimestamp = moment(endOfMonth).format('X');
+
+    console.log(starttimestamp, endtimestamp)
+    await payinReports.getlThisMonthamtPayin({ starttimestamp, endtimestamp },
+         (err, data) => {
+        console.log(data)
+        if (err)
+            res.status(500).send({
+                message: err.message || "Some error occurred while retrieving tutorials."
+            });
+        else res.status(200).json({
+            status: "success",
+            length: data ?.length,
+            data: data,
+        });
+    })
+}

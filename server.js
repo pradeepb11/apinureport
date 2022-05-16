@@ -1,12 +1,19 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const https = require('https');
-const fs = require('fs');
+const http = require("http");
 
 const app = express();
 
 app.use(cors());
+
+
+var corsOptions = {
+    origin: 'http://43.204.55.13:3000/',
+    optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+}
+
+app.use(cors(corsOptions));
 
 // request of content type applicaction json
 app.use(bodyParser.json());
@@ -20,19 +27,12 @@ app.use(function(req, res, next) {
     res.header('Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE, OPTIONS');
     res.header('Access-Control-Allow-Headers', "Origin, X-Requested-With, Content-Type, Accept");
     res.header("Access-Control-Allow-Headers", "Content-Type");
+
     next();
 })
 
 
-// https.createServer(
-//     // Provide the private and public key to the server by reading each
-//     // file's content with the readFileSync() method.
-//     {
-//         key: fs.readFileSync("key.pem"),
-//         cert: fs.readFileSync("cert.pem"),
-//     },
-//     app
-// )
+
 
 // simple route
 app.get("/", (req, res) => {
@@ -42,8 +42,9 @@ app.get("/", (req, res) => {
 require("./app/routes/payoutReport.route")(app);
 require("./app/routes/payinReport.router")(app);
 
+
 // set port listing for request
-const PORT = process.env.PORT || 3003;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`server is running on port ${PORT}`);
 })
